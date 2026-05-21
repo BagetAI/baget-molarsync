@@ -1,141 +1,144 @@
 import React from 'react';
 
 /**
- * MolarSync Alpha Dashboard
- * Converting the original landing page concept into a functional Next.js Page.
+ * MolarSync Insurance Command Center
+ * Modern High-Fidelity UI for Independent Dental Practices
  */
 export default function Dashboard() {
   return (
-    <div className="min-h-screen bg-[#F4ECD8] text-[#4A3728] font-sans selection:bg-[#6B2D3E] selection:text-[#F4ECD8]">
-      {/* Background Noise Simulation */}
-      <div className="fixed inset-0 opacity-[0.03] pointer-events-none z-50 bg-[url('https://www.transparenttextures.com/patterns/felt.png')]"></div>
-
-      <header className="py-12 border-b-2 border-[#4A3728] mb-12">
-        <div className="max-w-4xl mx-auto px-6 text-center">
-          <h1 className="text-4xl font-bold text-[#6B2D3E] font-serif mb-2">MolarSync</h1>
-          <p className="italic opacity-80 text-lg">The Zero-IT Operational Layer for Independent Dental</p>
+    <div className="min-h-screen bg-background font-sans text-navy-900">
+      {/* Navigation */}
+      <nav className="bg-navy-900 text-white px-8 py-4 flex justify-between items-center shadow-md">
+        <div className="flex items-center gap-2">
+          <div className="w-8 h-8 bg-teal-500 rounded flex items-center justify-center font-bold">M</div>
+          <span className="text-xl font-bold tracking-tight">MolarSync</span>
         </div>
-      </header>
-
-      <main className="max-w-4xl mx-auto px-6 pb-24">
-        <section className="text-center mb-16">
-          <h2 className="text-5xl font-serif text-[#6B2D3E] leading-tight mb-8">Operational Control Center</h2>
-          <p className="text-xl max-w-2xl mx-auto mb-10">
-            Automating the administrative "phone tag" so you can focus on patient care.
-          </p>
-        </section>
-
-        {/* Insurance Kanban Section */}
-        <h3 className="text-2xl font-serif text-[#6B2D3E] mb-6 border-l-4 border-[#6B2D3E] pl-4">Insurance Pre-Auth Tracker</h3>
-        <div className="bg-[#fdfdfd] border border-[#4A3728] p-6 rounded-md flex gap-4 overflow-x-auto shadow-md mb-16">
-          <KanbanColumn title="Draft" cards={[]} />
-          <KanbanColumn title="Submitted" cards={[
-            { name: 'P. Miller', code: 'D3330 - Root Canal', status: 'Sent 2d ago', type: 'pending' },
-            { name: 'J. Doe', code: 'D2740 - Crown', status: 'Sent 5d ago', type: 'pending' }
-          ]} />
-          <KanbanColumn title="Authorized" cards={[
-            { name: 'S. Smith', name_full: 'Sarah Smith', code: 'D6010 - Implant', status: 'Ready to Book', type: 'success' }
-          ]} />
-          <KanbanColumn title="Action Required" cards={[]} />
-        </div>
-
-        {/* Reminders Section */}
-        <h3 className="text-2xl font-serif text-[#6B2D3E] mb-6 border-l-4 border-[#38B2AC] pl-4">Automated Reminders</h3>
-        <div className="bg-white border border-[#4A3728] rounded-md p-6 mb-16 shadow-md">
-          <div className="overflow-x-auto">
-            <table className="w-full text-left text-sm">
-              <thead>
-                <tr className="border-b border-gray-200">
-                  <th className="pb-3 font-bold text-gray-600">Patient</th>
-                  <th className="pb-3 font-bold text-gray-600">Appointment</th>
-                  <th className="pb-3 font-bold text-gray-600">CDT Codes</th>
-                  <th className="pb-3 font-bold text-gray-600">Status</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-gray-100">
-                <ReminderRow name="John Miller" time="May 22, 10:00 AM" codes="D1110" status="Queued" />
-                <ReminderRow name="Sarah Smith" time="May 22, 2:30 PM" codes="D2740" status="Ready" />
-                <ReminderRow name="David Wilson" time="May 23, 9:00 AM" codes="D0150" status="Pending" />
-              </tbody>
-            </table>
+        <div className="flex items-center gap-6 text-sm font-medium opacity-90">
+          <a href="#" className="hover:text-teal-500 transition-colors">Dashboard</a>
+          <a href="#" className="hover:text-teal-500 transition-colors">Patients</a>
+          <a href="#" className="border-b-2 border-teal-500 pb-1">Insurance Tracker</a>
+          <a href="#" className="hover:text-teal-500 transition-colors">Settings</a>
+          <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center text-xs border border-white/20">
+            DR
           </div>
-          <div className="mt-6 flex justify-end">
-            <button className="bg-[#38B2AC] text-white px-4 py-2 rounded text-sm font-bold shadow-sm hover:opacity-90 transition-opacity">
-              Trigger Reminder Sync
+        </div>
+      </nav>
+
+      <main className="max-w-[1440px] mx-auto p-8">
+        {/* Header */}
+        <div className="flex justify-between items-end mb-8">
+          <div>
+            <h1 className="text-3xl font-extrabold mb-2 tracking-tight">Insurance Command Center</h1>
+            <p className="text-slate-600">Recovering 10+ hours per week of administrative phone tag.</p>
+          </div>
+          <div className="flex gap-3">
+            <button className="px-4 py-2 bg-white border border-slate-200 rounded-md shadow-sm text-sm font-semibold hover:bg-slate-50 transition-colors">
+              Export Log
+            </button>
+            <button className="px-4 py-2 bg-blue-600 text-white rounded-md shadow-sm text-sm font-semibold hover:bg-blue-700 transition-all">
+              Manual Add Claim
             </button>
           </div>
         </div>
 
-        <section className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
-          <Feature title="CDT-Aware SMS" description="Reminders automatically adjust for specific procedures. Crowns get prep-instructions; Cleanings get flossing tips." />
-          <Feature title="Zero-IT Sync" description="Background processes poll carrier FHIR APIs every 24 hours to update your board automatically." />
-        </section>
+        {/* Dashboard Preview Image */}
+        <div className="mb-12 rounded-xl overflow-hidden border border-slate-200 shadow-lg">
+          <img 
+            src="images/high-fidelity-ui-dashboard-for-a-dental-.png" 
+            alt="MolarSync Insurance Tracker Dashboard Preview" 
+            className="w-full h-auto object-cover"
+          />
+        </div>
 
-        <section className="bg-[#2C3E50] text-[#F4ECD8] p-12 rounded-lg text-center">
-          <h3 className="text-3xl font-serif mb-6 text-[#F4ECD8]">Developer Testing</h3>
-          <p className="mb-4 opacity-90">Test the reminder engine by triggering a mock SMS queue for an appointment.</p>
-          <div className="bg-[#1a252f] p-4 rounded text-left font-mono text-sm overflow-x-auto border border-[#4A3728] mb-8 text-[#38B2AC]">
-            {`curl -X POST /api/reminders/trigger \\
--H "Content-Type: application/json" \\
--d '{"appointmentId": "appt_002"}'`}
+        {/* Kanban Board Mockup */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+          <KanbanColumn title="Draft" count={2} status="bg-slate-200 text-slate-700">
+            <ClaimCard name="Alice Johnson" code="D2740" status="Missing Narrative" urgency="high" />
+            <ClaimCard name="Bob Smith" code="D6010" status="Ready to Submit" urgency="low" />
+          </KanbanColumn>
+          
+          <KanbanColumn title="Submitted" count={4} status="bg-blue-100 text-blue-700">
+            <ClaimCard name="Charlie Brown" code="D3330" carrier="Delta Dental" time="2d ago" />
+            <ClaimCard name="Diana Prince" code="D2740" carrier="Cigna" time="5d ago" />
+          </KanbanColumn>
+
+          <KanbanColumn title="Action Required" count={1} status="bg-yellow-100 text-yellow-700">
+            <ClaimCard name="Edward Norton" code="D6010" carrier="MetLife" status="Need X-Ray" urgency="high" />
+          </KanbanColumn>
+
+          <KanbanColumn title="Authorized" count={3} status="bg-teal-100 text-teal-700">
+            <ClaimCard name="Fiona Apple" code="D2740" amount="$1,250" status="Ready to Book" authorized />
+            <ClaimCard name="George Miller" code="D3330" amount="$800" status="Ready to Book" authorized />
+          </KanbanColumn>
+        </div>
+
+        {/* Claim Detail Section */}
+        <div className="mt-20">
+          <h2 className="text-2xl font-bold mb-8">Claim Detail View</h2>
+          <div className="rounded-xl overflow-hidden border border-slate-200 shadow-2xl max-w-5xl mx-auto">
+             <img 
+              src="images/detailed-ui-modal-window-overlay-for-a-d.png" 
+              alt="MolarSync Claim Detail Modal Preview" 
+              className="w-full h-auto"
+            />
           </div>
-          <p className="mb-4 opacity-90">Test the carrier webhook:</p>
-          <div className="bg-[#1a252f] p-4 rounded text-left font-mono text-sm overflow-x-auto border border-[#4A3728] text-[#38B2AC]">
-            {`curl -X POST /api/webhooks/carrier \\
--H "Content-Type: application/json" \\
--d '{"claim_id": "pa_123", "status": "authorized", "auth_number": "AUTH-7788"}'`}
+        </div>
+
+        {/* Mobile View Section */}
+        <div className="mt-20 text-center">
+          <h2 className="text-2xl font-bold mb-8">Optimized for Front-Desk Tablets</h2>
+          <div className="max-w-4xl mx-auto rounded-xl overflow-hidden">
+             <img 
+              src="images/mobile-responsive-ui-design-of-the-molar.png" 
+              alt="MolarSync Mobile View Preview" 
+              className="w-full h-auto"
+            />
           </div>
-        </section>
+        </div>
       </main>
 
-      <footer className="py-12 border-t border-[#4A3728] opacity-70 text-center text-sm">
-        <p>&copy; 2026 MolarSync. Built for independent clinics. Reminders & Insurance Tracking active.</p>
+      <footer className="py-12 mt-20 border-t border-slate-200 bg-white text-center">
+        <p className="text-sm text-slate-500">&copy; 2026 MolarSync. Clinical Efficiency for Independent Dental.</p>
       </footer>
     </div>
   );
 }
 
-function KanbanColumn({ title, cards }: { title: string, cards: any[] }) {
+function KanbanColumn({ title, count, children, status }: any) {
   return (
-    <div className="flex-1 min-w-[200px] bg-[#eee] p-3 rounded-sm border border-dashed border-[#4A3728]">
-      <h4 className="text-xs uppercase font-bold text-[#2C3E50] mb-4 tracking-wider">{title}</h4>
-      {cards.length === 0 ? (
-        <div className="text-xs italic opacity-40 text-center py-4">No claims</div>
-      ) : (
-        cards.map((card, i) => (
-          <div key={i} className="bg-white p-3 mb-3 border border-[#ccc] text-sm shadow-sm hover:translate-y-[-2px] transition-transform cursor-pointer">
-            <strong className="block mb-1">{card.name}</strong>
-            <span className="text-xs text-gray-600 block mb-2">{card.code}</span>
-            <span className={`text-[10px] px-2 py-0.5 rounded text-white ${card.type === 'success' ? 'bg-[#38B2AC]' : 'bg-[#d69e2e]'}`}>
-              {card.status}
-            </span>
-          </div>
-        ))
-      )}
+    <div className="flex flex-col h-full">
+      <div className="flex justify-between items-center mb-4">
+        <h3 className="font-bold text-sm uppercase tracking-wider text-slate-500">{title}</h3>
+        <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${status}`}>{count}</span>
+      </div>
+      <div className="bg-slate-100/50 p-2 rounded-lg flex-1 border border-slate-200/50 min-h-[400px]">
+        {children}
+      </div>
     </div>
   );
 }
 
-function ReminderRow({ name, time, codes, status }: { name: string, time: string, codes: string, status: string }) {
+function ClaimCard({ name, code, carrier, time, status, urgency, authorized, amount }: any) {
   return (
-    <tr>
-      <td className="py-4 font-medium">{name}</td>
-      <td className="py-4 text-gray-600">{time}</td>
-      <td className="py-4"><code className="bg-gray-100 px-1 py-0.5 rounded text-xs">{codes}</code></td>
-      <td className="py-4">
-        <span className={`text-[10px] uppercase font-bold px-2 py-1 rounded ${status === 'Queued' ? 'bg-blue-100 text-blue-700' : 'bg-gray-100 text-gray-600'}`}>
-          {status}
-        </span>
-      </td>
-    </tr>
-  );
-}
-
-function Feature({ title, description }: { title: string, description: string }) {
-  return (
-    <div className="bg-white p-8 border border-[#4A3728] rounded shadow-[4px_4px_0_rgba(74,55,40,0.1)]">
-      <h3 className="text-xl font-serif text-[#6B2D3E] mb-3">{title}</h3>
-      <p className="text-gray-700">{description}</p>
+    <div className="bg-white p-4 rounded-lg shadow-card border border-slate-200 mb-3 hover:shadow-md transition-all cursor-pointer group">
+      <div className="flex justify-between items-start mb-2">
+        <h4 className="font-bold text-navy-900 group-hover:text-blue-600 transition-colors">{name}</h4>
+        {urgency === 'high' && <div className="w-2 h-2 bg-red-500 rounded-full"></div>}
+      </div>
+      <div className="text-xs text-slate-600 mb-3">
+        <span className="font-mono bg-slate-100 px-1.5 py-0.5 rounded text-navy-900">{code}</span>
+        {carrier && <span className="ml-2">• {carrier}</span>}
+      </div>
+      <div className="flex justify-between items-center">
+        {status ? (
+          <span className={`text-[10px] font-bold px-2 py-1 rounded ${authorized ? 'bg-teal-500 text-white' : 'bg-slate-200 text-slate-700'}`}>
+            {status}
+          </span>
+        ) : (
+          <span className="text-[10px] text-slate-400">{time}</span>
+        )}
+        {amount && <span className="text-xs font-bold text-teal-600">{amount}</span>}
+      </div>
     </div>
   );
 }

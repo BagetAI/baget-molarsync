@@ -8,14 +8,26 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        serif: ['Libre Baskerville', 'serif'],
-        sans: ['Lato', 'sans-serif'],
+        sans: ['Inter', 'sans-serif'],
       },
       colors: {
-        burgundy: '#6B2D3E',
-        cream: '#F4ECD8',
-        navy: '#2C3E50',
+        navy: {
+          900: '#1A365D',
+        },
+        blue: {
+          600: '#2B6CB0',
+        },
+        teal: {
+          500: '#38B2AC',
+        },
+        slate: {
+          600: '#4A5568',
+        },
+        background: '#F7FAFC',
       },
+      boxShadow: {
+        'card': '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)',
+      }
     },
   },
   plugins: [],

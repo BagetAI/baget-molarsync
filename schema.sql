@@ -47,9 +47,22 @@ CREATE TABLE appointments (
     end_time TIMESTAMP WITH TIME ZONE NOT NULL,
     status VARCHAR(50) DEFAULT 'scheduled', -- scheduled, confirmed, arrived, completed, cancelled, no-show
     treatment_description TEXT,
+    cdt_codes TEXT[], -- Array of CDT codes for the planned procedures
     is_self_booked BOOLEAN DEFAULT FALSE,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
+-- Appointment_Reminders Table: Logic for automated SMS/Email triggers
+CREATE TABLE appointment_reminders (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    appointment_id UUID REFERENCES appointments(id) ON DELETE CASCADE,
+    reminder_type VARCHAR(20) NOT NULL, -- '24h', '2h', 'confirmation'
+    status VARCHAR(20) DEFAULT 'queued', -- queued, sent, failed
+    message_body TEXT NOT NULL,
+    scheduled_for TIMESTAMP WITH TIME ZONE,
+    sent_at TIMESTAMP WITH TIME ZONE,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
 
 -- Insurance_Auths Table: The "Insurance Black Hole" tracker (Kanban Foundation)
@@ -76,3 +89,5 @@ CREATE INDEX idx_patients_practice ON patients(practice_id);
 CREATE INDEX idx_appointments_practice_time ON appointments(practice_id, start_time);
 CREATE INDEX idx_insurance_auths_status ON insurance_auths(status);
 CREATE INDEX idx_insurance_auths_practice ON insurance_auths(practice_id);
+CREATE INDEX idx_reminders_appointment ON appointment_reminders(appointment_id);
+CREATE INDEX idx_reminders_status ON appointment_reminders(status);

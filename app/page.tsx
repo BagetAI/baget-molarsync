@@ -19,13 +19,14 @@ export default function Dashboard() {
 
       <main className="max-w-4xl mx-auto px-6 pb-24">
         <section className="text-center mb-16">
-          <h2 className="text-5xl font-serif text-[#6B2D3E] leading-tight mb-8">Insurance Pre-Auth Tracker</h2>
+          <h2 className="text-5xl font-serif text-[#6B2D3E] leading-tight mb-8">Operational Control Center</h2>
           <p className="text-xl max-w-2xl mx-auto mb-10">
-            Real-time synchronization with your legacy PMS. Replacing sticky notes with automated carrier polling.
+            Automating the administrative "phone tag" so you can focus on patient care.
           </p>
         </section>
 
-        {/* Kanban Board Component */}
+        {/* Insurance Kanban Section */}
+        <h3 className="text-2xl font-serif text-[#6B2D3E] mb-6 border-l-4 border-[#6B2D3E] pl-4">Insurance Pre-Auth Tracker</h3>
         <div className="bg-[#fdfdfd] border border-[#4A3728] p-6 rounded-md flex gap-4 overflow-x-auto shadow-md mb-16">
           <KanbanColumn title="Draft" cards={[]} />
           <KanbanColumn title="Submitted" cards={[
@@ -38,15 +39,48 @@ export default function Dashboard() {
           <KanbanColumn title="Action Required" cards={[]} />
         </div>
 
+        {/* Reminders Section */}
+        <h3 className="text-2xl font-serif text-[#6B2D3E] mb-6 border-l-4 border-[#38B2AC] pl-4">Automated Reminders</h3>
+        <div className="bg-white border border-[#4A3728] rounded-md p-6 mb-16 shadow-md">
+          <div className="overflow-x-auto">
+            <table className="w-full text-left text-sm">
+              <thead>
+                <tr className="border-b border-gray-200">
+                  <th className="pb-3 font-bold text-gray-600">Patient</th>
+                  <th className="pb-3 font-bold text-gray-600">Appointment</th>
+                  <th className="pb-3 font-bold text-gray-600">CDT Codes</th>
+                  <th className="pb-3 font-bold text-gray-600">Status</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-gray-100">
+                <ReminderRow name="John Miller" time="May 22, 10:00 AM" codes="D1110" status="Queued" />
+                <ReminderRow name="Sarah Smith" time="May 22, 2:30 PM" codes="D2740" status="Ready" />
+                <ReminderRow name="David Wilson" time="May 23, 9:00 AM" codes="D0150" status="Pending" />
+              </tbody>
+            </table>
+          </div>
+          <div className="mt-6 flex justify-end">
+            <button className="bg-[#38B2AC] text-white px-4 py-2 rounded text-sm font-bold shadow-sm hover:opacity-90 transition-opacity">
+              Trigger Reminder Sync
+            </button>
+          </div>
+        </div>
+
         <section className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
-          <Feature title="API Documentation" description="REST endpoints for CRUD operations and carrier webhooks are now live at /api/insurance/preauth." />
+          <Feature title="CDT-Aware SMS" description="Reminders automatically adjust for specific procedures. Crowns get prep-instructions; Cleanings get flossing tips." />
           <Feature title="Zero-IT Sync" description="Background processes poll carrier FHIR APIs every 24 hours to update your board automatically." />
         </section>
 
         <section className="bg-[#2C3E50] text-[#F4ECD8] p-12 rounded-lg text-center">
           <h3 className="text-3xl font-serif mb-6 text-[#F4ECD8]">Developer Testing</h3>
-          <p className="mb-8 opacity-90">Test the carrier webhook by sending a POST request to our listener.</p>
-          <div className="bg-[#1a252f] p-4 rounded text-left font-mono text-sm overflow-x-auto border border-[#4A3728]">
+          <p className="mb-4 opacity-90">Test the reminder engine by triggering a mock SMS queue for an appointment.</p>
+          <div className="bg-[#1a252f] p-4 rounded text-left font-mono text-sm overflow-x-auto border border-[#4A3728] mb-8 text-[#38B2AC]">
+            {`curl -X POST /api/reminders/trigger \\
+-H "Content-Type: application/json" \\
+-d '{"appointmentId": "appt_002"}'`}
+          </div>
+          <p className="mb-4 opacity-90">Test the carrier webhook:</p>
+          <div className="bg-[#1a252f] p-4 rounded text-left font-mono text-sm overflow-x-auto border border-[#4A3728] text-[#38B2AC]">
             {`curl -X POST /api/webhooks/carrier \\
 -H "Content-Type: application/json" \\
 -d '{"claim_id": "pa_123", "status": "authorized", "auth_number": "AUTH-7788"}'`}
@@ -55,7 +89,7 @@ export default function Dashboard() {
       </main>
 
       <footer className="py-12 border-t border-[#4A3728] opacity-70 text-center text-sm">
-        <p>&copy; 2026 MolarSync. Built for independent clinics. HIPAA-Ready Backend.</p>
+        <p>&copy; 2026 MolarSync. Built for independent clinics. Reminders & Insurance Tracking active.</p>
       </footer>
     </div>
   );
@@ -79,6 +113,21 @@ function KanbanColumn({ title, cards }: { title: string, cards: any[] }) {
         ))
       )}
     </div>
+  );
+}
+
+function ReminderRow({ name, time, codes, status }: { name: string, time: string, codes: string, status: string }) {
+  return (
+    <tr>
+      <td className="py-4 font-medium">{name}</td>
+      <td className="py-4 text-gray-600">{time}</td>
+      <td className="py-4"><code className="bg-gray-100 px-1 py-0.5 rounded text-xs">{codes}</code></td>
+      <td className="py-4">
+        <span className={`text-[10px] uppercase font-bold px-2 py-1 rounded ${status === 'Queued' ? 'bg-blue-100 text-blue-700' : 'bg-gray-100 text-gray-600'}`}>
+          {status}
+        </span>
+      </td>
+    </tr>
   );
 }
 

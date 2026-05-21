@@ -1,16 +1,18 @@
--- MolarSync Infrastructure Manifest
--- Provisioned on May 21, 2026
+# MolarSync Infrastructure Manifest
+# Provisioned on May 21, 2026
 
--- [Internal] Practices & Tenant Data
--- Handles multi-tenancy and clinic settings.
+# [Internal] Practices & Tenant Data
+# Handles multi-tenancy and clinic settings.
 
--- [Internal] Patients & PHI
--- Encrypted at rest; accessed via HIPAA-compliant gateway.
+# [Internal] Patients & PHI
+# Encrypted at rest; accessed via HIPAA-compliant gateway.
 
--- [Public-Write] Lead Capture
--- Used by landing page for Alpha Waitlist.
--- Table: molarsync_leads_v1
+# [Public-Write] Lead Capture
+# Table: molarsync_leads_v1
 
--- [Public-Write] Self-Booking Requests
--- Used by Patient Booking Portal.
--- Table: molarsync_bookings_v1
+# [Public-Write] Self-Booking Requests
+# Table: molarsync_bookings_v1
+
+# [API-Only] Insurance Pre-Authorizations
+# Table: molarsync_preauths_v1
+# Fields: id (UUID), practice_id (UUID), status (string), cdt_codes (array), last_updated (timestamp)

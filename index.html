@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MolarSync | Zero-IT Operational Layer for Dental</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --cream: #F4ECD8;
+            --burgundy: #6B2D3E;
+            --navy: #2C3E50;
+            --sepia: #4A3728;
+            --white: #FFFFFF;
+            --teal: #38B2AC;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--cream);
+            color: var(--sepia);
+            font-family: 'Lato', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Noise Overlay Effect */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url("https://www.transparenttextures.com/patterns/felt.png");
+            opacity: 0.05;
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Libre Baskerville', serif;
+            color: var(--burgundy);
+            font-weight: 700;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px;
+            text-align: center;
+        }
+
+        header {
+            padding: 60px 0;
+            border-bottom: 2px solid var(--sepia);
+            margin-bottom: 60px;
+        }
+
+        .logo {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            letter-spacing: -1px;
+        }
+
+        .tagline {
+            font-style: italic;
+            font-size: 1.1rem;
+            opacity: 0.8;
+        }
+
+        .hero {
+            padding: 40px 0 80px;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            line-height: 1.1;
+            margin-bottom: 30px;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            max-width: 700px;
+            margin: 0 auto 40px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: var(--burgundy);
+            color: var(--cream);
+            padding: 18px 40px;
+            font-family: 'Libre Baskerville', serif;
+            font-weight: 700;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 1.1rem;
+            box-shadow: 4px 4px 0 var(--navy);
+            transition: transform 0.1s;
+        }
+
+        .cta-button:hover {
+            transform: translate(2px, 2px);
+            box-shadow: 2px 2px 0 var(--navy);
+        }
+
+        .section-divider {
+            height: 1px;
+            background-color: var(--sepia);
+            width: 100px;
+            margin: 60px auto;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            text-align: left;
+            margin-bottom: 80px;
+        }
+
+        .feature-card {
+            background: var(--white);
+            padding: 30px;
+            border: 1px solid var(--sepia);
+            border-radius: 4px;
+            box-shadow: 4px 4px 0 rgba(74, 55, 40, 0.1);
+        }
+
+        .feature-card h3 {
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+
+        .kanban-preview {
+            background: #fdfdfd;
+            border: 1px solid var(--sepia);
+            padding: 20px;
+            margin: 40px 0;
+            display: flex;
+            gap: 15px;
+            overflow-x: auto;
+            border-radius: 4px;
+        }
+
+        .kanban-col {
+            flex: 1;
+            min-width: 200px;
+            background: #eee;
+            padding: 10px;
+            border-radius: 2px;
+            border: 1px dashed var(--sepia);
+        }
+
+        .kanban-col h4 {
+            font-family: 'Lato', sans-serif;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            margin-bottom: 10px;
+            color: var(--navy);
+        }
+
+        .card {
+            background: white;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            font-size: 0.9rem;
+            box-shadow: 2px 2px 0 rgba(0,0,0,0.05);
+        }
+
+        .status-tag {
+            font-size: 0.7rem;
+            padding: 2px 6px;
+            border-radius: 2px;
+            color: white;
+        }
+
+        .status-pending { background: #d69e2e; }
+        .status-auth { background: var(--teal); }
+
+        footer {
+            padding: 60px 0;
+            border-top: 1px solid var(--sepia);
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        form {
+            max-width: 500px;
+            margin: 0 auto;
+            text-align: left;
+            background: var(--white);
+            padding: 40px;
+            border: 1px solid var(--sepia);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 700;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--sepia);
+            border-radius: 4px;
+            background: var(--cream);
+            font-family: 'Lato', sans-serif;
+        }
+
+        .waitlist-section {
+            padding: 100px 0;
+            background: var(--navy);
+            color: var(--cream);
+        }
+
+        .waitlist-section h2 {
+            color: var(--cream);
+            margin-bottom: 40px;
+        }
+
+        @media (max-width: 768px) {
+            .features { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 2.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <div class="logo">MolarSync</div>
+            <div class="tagline">The Zero-IT Operational Layer for Independent Dental</div>
+        </div>
+    </header>
+
+    <section class="hero container">
+        <h1>Stop tracking insurance on sticky notes.</h1>
+        <p>MolarSync automates the "Insurance Black Hole" for 1-4 chair clinics. No servers, no local IT support, just a clean dashboard that syncs with your legacy system in minutes.</p>
+        <a href="#join" class="cta-button">Join the Alpha Pilot</a>
+    </section>
+
+    <div class="container">
+        <div class="kanban-preview">
+            <div class="kanban-col">
+                <h4>Submitted</h4>
+                <div class="card">
+                    <strong>P. Miller</strong><br>
+                    #78291 - Root Canal<br>
+                    <span class="status-tag status-pending">Sent 2d ago</span>
+                </div>
+                <div class="card">
+                    <strong>J. Doe</strong><br>
+                    #12044 - Crown<br>
+                    <span class="status-tag status-pending">Sent 5d ago</span>
+                </div>
+            </div>
+            <div class="kanban-col">
+                <h4>Authorized</h4>
+                <div class="card">
+                    <strong>S. Smith</strong><br>
+                    #99281 - Implant<br>
+                    <span class="status-tag status-auth">Ready to book</span>
+                </div>
+            </div>
+            <div class="kanban-col" style="opacity: 0.5;">
+                <h4>Scheduled</h4>
+                <div class="card">
+                    <strong>A. Vance</strong><br>
+                    #44521 - Bridge
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="container" style="padding: 80px 0;">
+        <div class="features">
+            <div class="feature-card">
+                <h3>The Insurance Tracker</h3>
+                <p>A Trello-style board that automatically flags pre-authorizations that haven't been responded to in 10 days. Never lose a claim in the void again.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Zero-IT Deployment</h3>
+                <p>No hardware to install. Our browser-based overlay connects to Open Dental or Dentrix in under 10 minutes. Your local IT guy can take the day off.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Smart Self-Booking</h3>
+                <p>Patients book themselves, but we check insurance eligibility <em>in real-time</em>. No more surprise denials at the front desk.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Automated Recall</h3>
+                <p>Smart SMS reminders that don't just ask patients to come in—they tell them exactly what their insurance has already approved.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="join" class="waitlist-section">
+        <div class="container">
+            <h2>Join the 2026 Founder Circle</h2>
+            <p style="margin-bottom: 40px;">We are accepting 5 pilot practices for Q3 2026. Get lifetime pricing and direct influence on the roadmap.</p>
+            
+            <form id="waitlistForm" onsubmit="handleWaitlist(event)">
+                <div class="form-group">
+                    <label for="name">Your Name</label>
+                    <input type="text" id="name" required placeholder="Dr. Jane Smith or Office Manager">
+                </div>
+                <div class="form-group">
+                    <label for="email">Work Email</label>
+                    <input type="email" id="email" required placeholder="office@clinic.com">
+                </div>
+                <div class="form-group">
+                    <label for="practice">Practice Name</label>
+                    <input type="text" id="practice" required placeholder="Main St Dental">
+                </div>
+                <div class="form-group">
+                    <label for="pms">Current Software</label>
+                    <select id="pms">
+                        <option value="open_dental">Open Dental</option>
+                        <option value="dentrix">Dentrix</option>
+                        <option value="eaglesoft">Eaglesoft</option>
+                        <option value="other">Other / Manual</option>
+                    </select>
+                </div>
+                <button type="submit" class="cta-button" style="width: 100%; border: none; cursor: pointer;">Secure My Spot</button>
+            </form>
+            <div id="successMessage" style="display: none; margin-top: 20px; color: var(--teal); font-weight: bold;">
+                Success! We'll reach out within 24 hours to schedule your Zero-IT audit.
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 MolarSync. Built for independent clinics. No servers required.</p>
+        </div>
+    </footer>
+
+    <script>
+        function handleWaitlist(event) {
+            event.preventDefault();
+            const form = document.getElementById('waitlistForm');
+            const success = document.getElementById('successMessage');
+            
+            // Simulation of database submission
+            const data = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                practice: document.getElementById('practice').value,
+                pms: document.getElementById('pms').value,
+                timestamp: new Date().toISOString()
+            };
+
+            console.log('Submitting lead to molarsync_leads_v1:', data);
+            
+            form.style.display = 'none';
+            success.style.display = 'block';
+            
+            // In a real environment, we would call fetch() here to post to the Baget database
+        }
+    </script>
+</body>
+</html>
